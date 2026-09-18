@@ -66,13 +66,11 @@ class CloneManager @Inject constructor(
     /**
      * Determines the best clone strategy for this device based on its capabilities.
      */
-    fun getCloneStrategy(): CloneStrategy {
-        return when {
-            isManagedProfileSupported() -> CloneStrategy.MANAGED_PROFILE
-            isMultiUserSupported() -> CloneStrategy.MULTI_USER
-            else -> CloneStrategy.FALLBACK
-        }
-    }
+    fun getCloneStrategy(): CloneStrategy =
+        decideStrategy(
+            managedProfileSupported = isManagedProfileSupported(),
+            multiUserSupported = isMultiUserSupported()
+        )
 
     /**
      * Launches the clone.
@@ -113,5 +111,26 @@ class CloneManager @Inject constructor(
     private fun isMultiUserSupported(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
             packageManager.hasSystemFeature("android.software.managed_users")
+    }
+
+    companion object {
+        /**
+         * Pure strategy-selection logic, split out from the [PackageManager]-dependent
+         * capability checks so it can be unit-tested without an Android runtime.
+         *
+         * Preference order: managed profile > multi-user > fallback. Note that even when a
+         * non-fallback strategy is selected, actually provisioning an isolated instance
+         * requires Device/Profile Owner privileges that a normal sideloaded app cannot hold
+         * (see the class KDoc); the strategy therefore only reports the best *reachable*
+         * option, and the current implementation always relaunches the source app.
+         */
+        fun decideStrategy(
+            managedProfileSupported: Boolean,
+            multiUserSupported: Boolean
+        ): CloneStrategy = when {
+            managedProfileSupported -> CloneStrategy.MANAGED_PROFILE
+            multiUserSupported -> CloneStrategy.MULTI_USER
+            else -> CloneStrategy.FALLBACK
+        }
     }
 }

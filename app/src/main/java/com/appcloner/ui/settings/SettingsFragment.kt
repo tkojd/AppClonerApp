@@ -1,7 +1,5 @@
 package com.appcloner.ui.settings
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,20 +11,23 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.appcloner.R
+import com.appcloner.data.PreferencesManager
 import com.appcloner.databinding.FragmentSettingsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Plain settings screen (no PreferenceFragmentCompat dependency): a "show system apps"
- * toggle persisted to [SharedPreferences], a destructive "clear all clones" action, and an
- * about section showing the app version resolved from the [PackageManager].
+ * toggle, a destructive "clear all clones" action, and an about section showing the app
+ * version resolved from the [PackageManager].
  *
- * Note: the "show system apps" preference is persisted here under [KEY_SHOW_SYSTEM_APPS];
- * wiring it into [com.appcloner.ui.applist.AppListViewModel] globally is a future
- * enhancement. For now the app-list screen exposes its own in-screen filter chip.
+ * The "show system apps" toggle writes through the shared [PreferencesManager], which is
+ * the single source of truth also observed by
+ * [com.appcloner.ui.applist.AppListViewModel]; toggling it here immediately affects the
+ * app list.
  */
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -36,9 +37,8 @@ class SettingsFragment : Fragment() {
 
     private val viewModel: SettingsViewModel by viewModels()
 
-    private val prefs: SharedPreferences by lazy {
-        requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    }
+    @Inject
+    lateinit var preferencesManager: PreferencesManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,10 +58,9 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupShowSystemAppsSwitch() {
-        binding.showSystemAppsSwitch.isChecked =
-            prefs.getBoolean(KEY_SHOW_SYSTEM_APPS, false)
+        binding.showSystemAppsSwitch.isChecked = preferencesManager.showSystemApps
         binding.showSystemAppsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean(KEY_SHOW_SYSTEM_APPS, isChecked).apply()
+            preferencesManager.showSystemApps = isChecked
         }
     }
 
@@ -106,10 +105,5 @@ class SettingsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val PREFS_NAME = "app_cloner_prefs"
-        const val KEY_SHOW_SYSTEM_APPS = "show_system_apps"
     }
 }

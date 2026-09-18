@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.appcloner.R
 import com.appcloner.data.model.AppInfo
 import com.appcloner.databinding.FragmentAppListBinding
+import com.appcloner.ui.detail.CloneDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -67,9 +68,12 @@ class AppListFragment : Fragment() {
     }
 
     private fun onAppSelected(app: AppInfo) {
+        // Reference the ViewModel's argument-key constants (the single source of truth for
+        // this contract) rather than string literals, so a rename can't silently drift the
+        // producer out of sync with the consumer.
         val args = Bundle().apply {
-            putString("sourcePackageName", app.packageName)
-            putString("appName", app.appName)
+            putString(CloneDetailViewModel.ARG_SOURCE_PACKAGE, app.packageName)
+            putString(CloneDetailViewModel.ARG_APP_NAME, app.appName)
         }
         findNavController().navigate(R.id.action_appList_to_cloneDetail, args)
     }

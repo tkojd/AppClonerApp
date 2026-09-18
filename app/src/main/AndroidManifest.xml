@@ -2,16 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Required to query all installed packages on Android 11+ -->
+    <!-- Required to enumerate installed apps for cloning on Android 11+ (API 30+). -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
-    <!-- For reading package info -->
-    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
-    <!-- For managed profiles (requires device admin) -->
-    <uses-permission android:name="android.permission.MANAGE_USERS"
-        android:protectionLevel="signature" />
-    <!-- Internet for future features -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+      Note: MANAGE_USERS / managed-profile provisioning is intentionally NOT requested.
+      It is a signature/privileged permission that a normal sideloaded app can never be
+      granted, so declaring it would be dead weight. True app isolation via managed
+      profiles requires Device/Profile Owner privileges (see CloneManager KDoc).
+    -->
 
     <application
         android:name=".AppClonerApplication"

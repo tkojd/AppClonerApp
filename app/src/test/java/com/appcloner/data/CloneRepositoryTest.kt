@@ -93,6 +93,17 @@ class CloneRepositoryTest {
     }
 
     @Test
+    fun addCloneWithNextIndex_delegatesToDaoTransaction() = runTest {
+        val clone = sampleClone()
+        `when`(dao.insertCloneWithNextIndex(clone, null)).thenReturn(5)
+
+        val index = repository.addCloneWithNextIndex(clone)
+
+        assertEquals(5, index)
+        verify(dao).insertCloneWithNextIndex(clone, null)
+    }
+
+    @Test
     fun getClone_delegatesToDaoGetById() = runTest {
         val clone = sampleClone().copy(id = 7)
         `when`(dao.getCloneById(7L)).thenReturn(clone)

@@ -90,18 +90,28 @@ class CloneDetailViewModel @Inject constructor(
     fun createClone(label: String, defaultLabelFactory: (Int) -> String) {
         viewModelScope.launch {
             try {
-                val index = cloneRepository.nextCloneIndex(sourcePackageName)
                 val now = System.currentTimeMillis()
+                val trimmedLabel = label.trim()
+                // cloneIndex/cloneLabel here are placeholders when the label is blank; the
+                // repository assigns the real, race-safe index atomically at insert time and
+                // (when labelForIndex is supplied) derives the default label from it in the
+                // same transaction. See CloneRepository.addCloneWithNextIndex.
                 val clone = CloneInfo(
                     sourcePackageName = sourcePackageName,
-                    cloneLabel = label.trim().ifBlank { defaultLabelFactory(index) },
-                    cloneIndex = index,
+                    cloneLabel = trimmedLabel,
+                    cloneIndex = 0,
                     createdAt = now,
                     lastUsed = now,
                     isActive = true,
+                    // profileId stays -1: no managed profile / secondary user is created
+                    // (owner privileges required, see CloneManager). The clone is a logical
+                    // entry that relaunches the source app.
                     profileId = -1
                 )
-                cloneRepository.addClone(clone)
+                cloneRepository.addCloneWithNextIndex(
+                    clone = clone,
+                    labelForIndex = if (trimmedLabel.isBlank()) defaultLabelFactory else null
+                )
                 _events.send(CloneDetailEvent.CloneCreated)
             } catch (e: Exception) {
                 _events.send(CloneDetailEvent.CreateFailed(e.message))

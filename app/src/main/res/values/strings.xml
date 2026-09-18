@@ -51,4 +51,7 @@
     <string name="version_unknown">nieznana</string>
     <string name="package_label">Pakiet: %1$s</string>
     <string name="compatibility_title">Zgodność urządzenia</string>
+    <string name="clone_nature_title">Jak działają klony</string>
+    <string name="clone_nature_info">Klon to nazwana konfiguracja, która uruchamia oryginalną aplikację. Na zwykłym (nierootowanym) urządzeniu aplikacja nie tworzy w pełni odizolowanych instancji z osobnymi danymi ani osobnym logowaniem — pełna izolacja wymaga uprawnień właściciela urządzenia lub profilu.</string>
+    <string name="clones_info_banner">Klony uruchamiają oryginalną aplikację. Osobne dane dla każdego klonu wymagają uprawnień właściciela urządzenia/profilu i nie są dostępne dla zwykłej aplikacji.</string>
 </resources>
