@@ -34,4 +34,21 @@
     <string name="clones_count">%1$d klon(ów)</string>
     <string name="source_app">Aplikacja źródłowa</string>
     <string name="clone_index">Klon #%1$d</string>
+    <string name="loading">Ładowanie…</string>
+    <string name="app_icon_desc">Ikona aplikacji</string>
+    <string name="more_options">Więcej opcji</string>
+    <string name="empty_clones_desc">Ilustracja braku klonów</string>
+    <string name="go_to_apps">Przejdź do aplikacji</string>
+    <string name="rename_clone_title">Zmień nazwę klonu</string>
+    <string name="save">Zapisz</string>
+    <string name="confirm_delete_clone">Czy na pewno chcesz usunąć ten klon?</string>
+    <string name="all_clones_deleted">Wszystkie klony zostały usunięte</string>
+    <string name="clone_renamed">Nazwa klonu została zmieniona</string>
+    <string name="clone_launched">Uruchamianie klonu…</string>
+    <string name="clone_launch_error">Nie udało się uruchomić klonu</string>
+    <string name="settings_general">Ogólne</string>
+    <string name="settings_data">Dane</string>
+    <string name="version_unknown">nieznana</string>
+    <string name="package_label">Pakiet: %1$s</string>
+    <string name="compatibility_title">Zgodność urządzenia</string>
 </resources>
