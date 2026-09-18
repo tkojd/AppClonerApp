@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="app_icon_size">48dp</dimen>
+    <dimen name="clone_badge_size">20dp</dimen>
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_size_title">16sp</dimen>
+    <dimen name="text_size_subtitle">13sp</dimen>
+    <dimen name="text_size_badge">10sp</dimen>
+</resources>

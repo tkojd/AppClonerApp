@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/appListFragment">
+
+    <fragment
+        android:id="@+id/appListFragment"
+        android:name="com.appcloner.ui.applist.AppListFragment"
+        android:label="@string/nav_apps"
+        tools:layout="@layout/fragment_app_list">
+        <action
+            android:id="@+id/action_appList_to_cloneDetail"
+            app:destination="@id/cloneDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/clonesFragment"
+        android:name="com.appcloner.ui.clones.ClonesFragment"
+        android:label="@string/nav_clones"
+        tools:layout="@layout/fragment_clones" />
+
+    <fragment
+        android:id="@+id/cloneDetailFragment"
+        android:name="com.appcloner.ui.detail.CloneDetailFragment"
+        android:label="@string/create_clone"
+        tools:layout="@layout/fragment_clone_detail">
+        <argument
+            android:name="sourcePackageName"
+            app:argType="string" />
+        <argument
+            android:name="appName"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.appcloner.ui.settings.SettingsFragment"
+        android:label="@string/nav_settings"
+        tools:layout="@layout/fragment_settings" />
+
+</navigation>

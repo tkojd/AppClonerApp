@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">App Cloner</string>
+    <string name="nav_apps">Aplikacje</string>
+    <string name="nav_clones">Klony</string>
+    <string name="nav_settings">Ustawienia</string>
+    <string name="search_hint">Szukaj aplikacji…</string>
+    <string name="show_system_apps">Pokaż aplikacje systemowe</string>
+    <string name="no_apps_found">Nie znaleziono aplikacji</string>
+    <string name="no_clones_yet">Brak klonów</string>
+    <string name="no_clones_description">Wybierz aplikację z zakładki \"Aplikacje\" i utwórz pierwszy klon.</string>
+    <string name="create_clone">Utwórz klon</string>
+    <string name="clone_label_hint">Nazwa klonu</string>
+    <string name="clone_label_default">Klon %1$d</string>
+    <string name="launch_clone">Uruchom</string>
+    <string name="delete_clone">Usuń</string>
+    <string name="rename_clone">Zmień nazwę</string>
+    <string name="clone_created">Klon utworzony pomyślnie</string>
+    <string name="clone_deleted">Klon usunięty</string>
+    <string name="clone_error">Błąd podczas tworzenia klonu</string>
+    <string name="profiles_not_supported">Twoje urządzenie nie obsługuje profili zarządzanych. Klonowanie może być ograniczone.</string>
+    <string name="profiles_supported">Urządzenie obsługuje profile zarządzane.</string>
+    <string name="existing_clones">Istniejące klony</string>
+    <string name="add_new_clone">Dodaj nowy klon</string>
+    <string name="settings_show_system_apps">Pokaż aplikacje systemowe</string>
+    <string name="settings_show_system_apps_summary">Wyświetl aplikacje systemowe na liście</string>
+    <string name="settings_clear_all_clones">Usuń wszystkie klony</string>
+    <string name="settings_clear_all_clones_summary">Usuwa wszystkie zapisane konfiguracje klonów</string>
+    <string name="settings_about">O aplikacji</string>
+    <string name="settings_version">Wersja</string>
+    <string name="confirm_delete_all">Czy na pewno chcesz usunąć wszystkie klony?</string>
+    <string name="yes">Tak</string>
+    <string name="cancel">Anuluj</string>
+    <string name="clones_count">%1$d klon(ów)</string>
+    <string name="source_app">Aplikacja źródłowa</string>
+    <string name="clone_index">Klon #%1$d</string>
+</resources>
